@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sarus, LLC. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <sarus_sso_idp>
+            <general>
+                <enabled>0</enabled>
+                <enabled_slo>1</enabled_slo>
+                <entity_id>sarus_sso_idp/idp/metadata</entity_id>
+                <metadata_url>sarus_sso_idp/idp/metadata</metadata_url>
+                <single_sing_on_url>sarus_sso_idp/idp/signon</single_sing_on_url>
+                <single_sing_on_binding>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</single_sing_on_binding>
+                <single_logout_url>sarus_sso_idp/idp/logout</single_logout_url>
+                <single_logout_binding>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</single_logout_binding>
+                <allowed_seconds_skew>120</allowed_seconds_skew>
+            </general>
+            <security>
+                <want_authn_signed>1</want_authn_signed>
+                <want_logout_request_signed>1</want_logout_request_signed>
+                <want_logout_response_signed>1</want_logout_response_signed>
+                <assertion_encrypted>0</assertion_encrypted>
+                <assertion_signed>1</assertion_signed>
+                <messages_signed>1</messages_signed>
+                <signature_algorithm>http://www.w3.org/2000/09/xmldsig#rsa-sha1</signature_algorithm>
+                <digest_algorithm>http://www.w3.org/2000/09/xmldsig#sha1</digest_algorithm>
+                <encrypted_method_key>http://www.w3.org/2001/04/xmlenc#rsa-1_5</encrypted_method_key>
+                <encrypted_method_data>http://www.w3.org/2001/04/xmlenc#aes128-cbc</encrypted_method_data>
+            </security>
+            <sp>
+                <name_id>email</name_id>
+                <assertion_consumer_binding>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST</assertion_consumer_binding>
+                <single_logout_binding>urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect</single_logout_binding>
+            </sp>
+        </sarus_sso_idp>
+    </default>
+</config>

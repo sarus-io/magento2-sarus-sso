@@ -1,0 +1,28 @@
+Index: src/LightSaml/Model/Metadata/EntityDescriptor.php
+<+>UTF-8
+===================================================================
+--- src/LightSaml/Model/Metadata/EntityDescriptor.php	(date 1528896479000)
++++ src/LightSaml/Model/Metadata/EntityDescriptor.php	(date 1528896479000)
+@@ -430,7 +430,7 @@
+      */
+     public function serialize(\DOMNode $parent, SerializationContext $context)
+     {
+-        $result = $this->createElement('EntityDescriptor', SamlConstants::NS_METADATA, $parent, $context);
++        $result = $this->createElement('md:EntityDescriptor', SamlConstants::NS_METADATA, $parent, $context);
+
+         $this->attributesToXml(array('entityID', 'validUntil', 'cacheDuration', 'ID'), $result);
+
+Index: src/LightSaml/Model/Assertion/Assertion.php
+<+>UTF-8
+===================================================================
+--- src/LightSaml/Model/Assertion/Assertion.php	(date 1528896519000)
++++ src/LightSaml/Model/Assertion/Assertion.php	(date 1528896519000)
+@@ -414,7 +414,7 @@
+     {
+         $this->prepareForXml();
+ 
+-        $result = $this->createElement('Assertion', SamlConstants::NS_ASSERTION, $parent, $context);
++        $result = $this->createElement('saml:Assertion', SamlConstants::NS_ASSERTION, $parent, $context);
+ 
+         $this->attributesToXml(array('ID', 'Version', 'IssueInstant'), $result);
+ 

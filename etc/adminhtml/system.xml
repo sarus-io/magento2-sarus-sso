@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sarus, LLC. All rights reserved.
+ */
+ -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="sarus" translate="label" sortOrder="500">
+            <label>Sarus</label>
+        </tab>
+
+        <section id="sarus_sso_idp" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="0">
+            <label>SSO Identity Provider</label>
+            <tab>sarus</tab>
+            <resource>Sarus_SsoIdp::system_config</resource>
+
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>General</label>
+
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="enabled_slo" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled Single Logout</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="entity_id" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Entity Id</label>
+                    <frontend_model>Sarus\SsoIdp\Block\Adminhtml\System\Config\Field\Url</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="single_sing_on_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Single Sign On Url</label>
+                    <comment><![CDATA[HTTP-Redirect binding]]></comment>
+                    <frontend_model>Sarus\SsoIdp\Block\Adminhtml\System\Config\Field\Url</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="single_logout_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Single Logout Url</label>
+                    <comment><![CDATA[HTTP-Redirect binding]]></comment>
+                    <frontend_model>Sarus\SsoIdp\Block\Adminhtml\System\Config\Field\Url</frontend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                        <field id="enabled_slo">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="credentials" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Credentials</label>
+
+                <field id="private_key" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Private Key</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="cert" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>X.509 cert</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="sp" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Service Provider</label>
+                <field id="entity_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Entity Id</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="name_id" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Name Id Value</label>
+                    <source_model>Sarus\SsoIdp\Model\Config\Source\NameId</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="assertion_consumer_url" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Assertion Consumer Url</label>
+                    <comment><![CDATA[HTTP-POST binding]]></comment>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="single_logout_url" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Logout Url</label>
+                    <comment><![CDATA[HTTP-Redirect binding]]></comment>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="cert" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>X.509 cert</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="security" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Security</label>
+
+                <field id="metadata_signed" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Metadata Signed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="heading_inbound" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Inbound</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="want_authn_signed" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Want Authn Request Signed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="want_logout_request_signed" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Want Logout Request Signed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="want_logout_response_signed" translate="label" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Want Logout Response Signed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="heading_outbound" translate="label" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Outbound</label>
+                    <frontend_model>Magento\Config\Block\System\Config\Form\Field\Heading</frontend_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="assertion_encrypted" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Assertion Encrypted</label>
+                    <comment>Must be enabled if SSL/HTTPs is disabled</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="encrypted_method_key" translate="label" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Encrypted method for the key</label>
+                    <source_model>Sarus\SsoIdp\Model\Config\Source\EncryptedMethod</source_model>
+                    <depends>
+                        <field id="assertion_encrypted">1</field>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="encrypted_method_data" translate="label" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Encrypted method for the data</label>
+                    <source_model>Sarus\SsoIdp\Model\Config\Source\EncryptedMethod</source_model>
+                    <depends>
+                        <field id="assertion_encrypted">1</field>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="assertion_signed" translate="label" type="select" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Assertion Signed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="messages_signed" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Messages Signed</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="signature_algorithm" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Signature Algorithm</label>
+                    <source_model>Sarus\SsoIdp\Model\Config\Source\SignatureAlgorithm</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="digest_algorithm" translate="label" type="select" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>Digest Algorithm</label>
+                    <source_model>Sarus\SsoIdp\Model\Config\Source\DigestAlgorithm</source_model>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+
+            <group id="contact" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Contacts</label>
+
+                <field id="technical_contact_given_name" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Technical Given Name</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="technical_contact_email" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Technical Email</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+
+                <field id="support_contact_given_name" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Support Given Name</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+                <field id="support_contact_email" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Support Email</label>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

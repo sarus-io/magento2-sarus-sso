@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Sarus, LLC. All rights reserved.
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Sarus\SsoIdp\Model\Assertion\NameIdBuilder">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Sarus\SsoIdp\Model\Assertion\AuthnStatementBuilder">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+    <type name="Sarus\SsoIdp\Model\Assertion\AttributeStatementBuilder">
+        <arguments>
+            <argument name="customerSession" xsi:type="object">Magento\Customer\Model\Session\Proxy</argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Customer\Controller\Account\Login">
+        <plugin name="sarus_sso_idp" type="Sarus\SsoIdp\Plugin\Customer\Controller\Account\Login" />
+    </type>
+    <type name="Magento\Customer\Controller\Account\Logout">
+        <plugin name="sarus_sso_idp" type="Sarus\SsoIdp\Plugin\Customer\Controller\Account\Logout" />
+    </type>
+</config>
