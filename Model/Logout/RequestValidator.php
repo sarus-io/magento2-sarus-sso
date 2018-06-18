@@ -188,8 +188,8 @@ class RequestValidator
             throw new \InvalidArgumentException('Name ID is not specified.');
         }
 
-        if ($customer->getDataUsingMethod($this->configSp->getNameId()) != $logoutRequest->getNameID()->getValue()
-            && $customer
+        if ($customer
+            && $customer->getDataUsingMethod($this->configSp->getNameId()) != $logoutRequest->getNameID()->getValue()
         ) {
             throw new \InvalidArgumentException('Wrong Name ID value.');
         }

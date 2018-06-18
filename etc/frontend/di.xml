@@ -27,4 +27,7 @@
     <type name="Magento\Customer\Controller\Account\Logout">
         <plugin name="sarus_sso_idp" type="Sarus\SsoIdp\Plugin\Customer\Controller\Account\Logout" />
     </type>
+    <type name="Magento\Customer\Model\Account\Redirect">
+        <plugin name="sarus_sso_idp" type="Sarus\SsoIdp\Plugin\Customer\Account\Redirect" />
+    </type>
 </config>

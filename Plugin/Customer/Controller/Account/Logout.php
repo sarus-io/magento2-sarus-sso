@@ -61,6 +61,7 @@ class Logout
      * @return void
      *
      * @SuppressWarnings(PHPMD.UnusedFormalParameter)
+     * @SuppressWarnings(PHPMD.ExitExpression)
      */
     public function aroundExecute($subject, \Closure $proceed)
     {
@@ -71,5 +72,6 @@ class Logout
         $logoutResponse = $this->logoutRequestBuilder->build();
         $this->customerSession->setData(SsoIdpControllerLogout::LOGOUT_REQUEST_ID, $logoutResponse->getID());
         $this->messageTransporter->send($logoutResponse, $this->configSp->getSingleLogoutBinding());
+        exit;
     }
 }

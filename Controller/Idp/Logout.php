@@ -165,6 +165,8 @@ class Logout extends \Magento\Framework\App\Action\Action
      * @param $logoutRequest
      * @return void
      * @throws \Exception
+     *
+     * @SuppressWarnings(PHPMD.ExitExpression)
      */
     private function processLogoutRequest($logoutRequest)
     {
@@ -179,6 +181,7 @@ class Logout extends \Magento\Framework\App\Action\Action
 
         $logoutResponse = $this->logoutResponseBuilder->build($logoutRequest);
         $this->messageTransporter->send($logoutResponse, $this->configSp->getSingleLogoutBinding());
+        exit; // TODO
     }
 
     /**
