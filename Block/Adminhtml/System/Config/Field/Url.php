@@ -10,37 +10,21 @@ use Magento\Framework\Data\Form\Element\AbstractElement;
 class Url extends \Magento\Config\Block\System\Config\Form\Field
 {
     /**
-     * @var \Magento\Framework\App\RequestInterface
-     */
-    private $request;
-
-    /**
      * @var \Magento\Framework\Url
      */
     private $urlBuilder;
 
     /**
-     * @var \Magento\Store\Model\StoreManagerInterface
-     */
-    private $storeManager;
-
-    /**
      * @param \Magento\Backend\Block\Template\Context $context
-     * @param \Magento\Framework\App\RequestInterface $request
      * @param \Magento\Framework\Url $urlBuilder
-     * @param \Magento\Store\Model\StoreManagerInterface $storeManager
      * @param array $data
      */
     public function __construct(
         \Magento\Backend\Block\Template\Context $context,
-        \Magento\Framework\App\RequestInterface $request,
         \Magento\Framework\Url $urlBuilder,
-        \Magento\Store\Model\StoreManagerInterface $storeManager,
         array $data = []
     ) {
-        $this->request = $request;
         $this->urlBuilder = $urlBuilder;
-        $this->storeManager = $storeManager;
         parent::__construct($context, $data);
     }
 
@@ -59,10 +43,10 @@ class Url extends \Magento\Config\Block\System\Config\Form\Field
      */
     private function getCurrentScopeStore()
     {
-        $websiteCode = $this->request->getParam('website');
+        $websiteCode = $this->_request->getParam('website');
         return $websiteCode
-            ? $this->storeManager->getWebsite($websiteCode)->getDefaultStore()
-            : $this->storeManager->getDefaultStoreView();
+            ? $this->_storeManager->getWebsite($websiteCode)->getDefaultStore()
+            : $this->_storeManager->getDefaultStoreView();
     }
 
     /**

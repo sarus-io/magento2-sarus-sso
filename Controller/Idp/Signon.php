@@ -9,7 +9,6 @@ use Magento\Framework\App\State as AppState;
 use Magento\Framework\App\RequestInterface;
 use Magento\Framework\Exception\NotFoundException;
 use Magento\Customer\Model\Url as CustomerUrl;
-use Magento\Framework\Controller\ResultFactory;
 
 class Signon extends \Magento\Framework\App\Action\Action
 {
