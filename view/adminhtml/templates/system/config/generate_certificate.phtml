@@ -1,0 +1,55 @@
+<?php
+/**
+ * Copyright © Sarus, LLC. All rights reserved.
+ */
+
+/** @var $block \Sarus\SsoIdp\Block\Adminhtml\System\Config\GenerateCertificate */
+?>
+<div class="actions actions-generate-certificate">
+    <button onclick="generateCertificate(); return false;" class="action-generate-certificate" type="button" id="<?php echo $block->getHtmlId() ?>">
+        <span><?php echo $block->escapeHtml($block->getButtonLabel()) ?></span>
+    </button>
+
+    <span id="generate-certificate-result" class="message-generate-certificate"></span>
+</div>
+<script>
+    require(['jquery', 'mage/translate'], function ($, $t) {
+        window.generateCertificate = function () {
+
+            $('body').trigger('processStart');
+
+            var resultMessageBox = $('#generate-certificate-result');
+
+            resultMessageBox
+                .removeClass('success')
+                .removeClass('fail')
+                .css('color', '')
+                .text('');
+
+            $.post('<?php echo $block->getAjaxUrl() ?>', {
+                website: '<?php echo $block->getWebsiteCode() ?>',
+                form_key: '<?php echo $this->getFormKey() ?>'
+            }, 'json')
+            .done(function (result) {
+                resultMessageBox
+                    .addClass(result.status)
+                    .css('color', (result.status === 'success' ? 'green' : 'red'))
+                    .text(result.message);
+
+                if (result.status === 'success') {
+                    $('#sarus_sso_idp_credentials_private_key').val(result.private_key);
+                    $('#sarus_sso_idp_credentials_cert').val(result.certificate);
+                }
+            })
+            .fail(function () {
+                resultMessageBox
+                    .addClass('fail')
+                    .css('color', 'red')
+                    .text($t('An error occurred while request.'));
+            })
+            .always(function () {
+                $('body').trigger('processStop');
+            });
+        };
+    })
+</script>

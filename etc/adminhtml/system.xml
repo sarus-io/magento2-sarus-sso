@@ -74,6 +74,14 @@
                         <field id="sarus_sso_idp/general/enabled">1</field>
                     </depends>
                 </field>
+
+                <field id="generate_certificate" translate="button_label" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <frontend_model>Sarus\SsoIdp\Block\Adminhtml\System\Config\GenerateCertificate</frontend_model>
+                    <comment><![CDATA[Required information is taken from General > Store Information section and Customer Support email.]]></comment>
+                    <depends>
+                        <field id="sarus_sso_idp/general/enabled">1</field>
+                    </depends>
+                </field>
             </group>
 
             <group id="sp" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="0">

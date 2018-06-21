@@ -17,6 +17,7 @@
     }
   ],
   "require": {
+    "ext-openssl": "*",
     "magento/module-customer": "100.*.*|101.*.*",
     "magento/module-store": "100.*.*",
     "magento/module-config": "100.*.*|101.*.*",
