@@ -77,7 +77,7 @@ class CertificateGenerator
 
         $emailAddress = $this->getConfigValue('trans_email/ident_support/email', $websiteCode);
         if ($emailAddress) {
-            $data['organizationName'] = $emailAddress;
+            $data['emailAddress'] = $emailAddress;
         }
 
         return $data;
