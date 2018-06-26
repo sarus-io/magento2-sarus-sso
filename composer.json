@@ -1,5 +1,5 @@
 {
-  "name": "sarus/magento2-sso-idp",
+  "name": "sarus-io/magento2_sarus_sso",
   "description": "Magento 2 extension - SSO Identity Provider",
   "version": "1.0.0-rc1",
   "type": "magento2-module",
